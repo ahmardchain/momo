@@ -25,7 +25,7 @@
           "-c"
         ],
         "cmd": [
-          "set -e; cd /tmp; python3 - <<'PY'\nimport hashlib,urllib.request,sys\nfor name,url,want in [('probe.py','https://raw.githubusercontent.com/ahmardchain/momo/PLACEHOLDER/probe/probe.py','0fe543d31f36a24ad3c9e20a2e3f52a5c5f0cd24b293a6c15a99f43c5f891662'),('prompts.json','https://raw.githubusercontent.com/ahmardchain/momo/PLACEHOLDER/probe/prompts.json','c0ce9e12954d5e8721470bef8d02a4221f70351ba92f1137d821ac7d4cd5fd5f')]:\n    b=urllib.request.urlopen(url,timeout=60).read()\n    got=hashlib.sha256(b).hexdigest()\n    if got!=want: sys.exit(f'sha mismatch {name} {got}')\n    open(name,'wb').write(b)\nprint('probe verified')\nPY\nnvidia-smi || true; python3 /tmp/probe.py"
+          "set -e; cd /tmp; python3 - <<'PY'\nimport hashlib,urllib.request,sys\nfor name,url,want in [('probe.py','https://raw.githubusercontent.com/ahmardchain/momo/1d0dd43cf646ccf857d45511bf178895d877e7da/probe/probe.py','0fe543d31f36a24ad3c9e20a2e3f52a5c5f0cd24b293a6c15a99f43c5f891662'),('prompts.json','https://raw.githubusercontent.com/ahmardchain/momo/1d0dd43cf646ccf857d45511bf178895d877e7da/probe/prompts.json','c0ce9e12954d5e8721470bef8d02a4221f70351ba92f1137d821ac7d4cd5fd5f')]:\n    b=urllib.request.urlopen(url,timeout=60).read()\n    got=hashlib.sha256(b).hexdigest()\n    if got!=want: sys.exit(f'sha mismatch {name} {got}')\n    open(name,'wb').write(b)\nprint('probe verified')\nPY\nnvidia-smi || true; python3 /tmp/probe.py"
         ],
         "env": {
           "MODEL_PATH": "/models/fp16",
