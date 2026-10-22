@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@ardrive/turbo-sdk": "^1",
-    "@nosana/kit": "^2"
+    "@nosana/kit": "^2",
+    "arweave": "^1"
   },
   "license": "MIT"
 }
