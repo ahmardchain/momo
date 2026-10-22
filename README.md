@@ -61,7 +61,7 @@ with `@nosana/kit` — [first job](https://learn.nosana.com/api/first-job.html);
 
 ```bash
 git clone https://github.com/ahmardchain/momo && cd momo
-npm install --ignore-scripts   # plain npm install can hang on turbo-sdk postinstall
+npm install --ignore-scripts   # if it stalls, install @nosana/kit first, then @ardrive/turbo-sdk arweave
 python3 -m venv .venv && .venv/bin/pip install numpy matplotlib pytest
 .venv/bin/python -m pytest -q tests                      # synthetic tests, no GPU
 
