@@ -1,0 +1,12 @@
+{
+  "image": "docker.io/vllm/vllm-openai:v0.6.6",
+  "repo_raw": "https://raw.githubusercontent.com/ahmardchain/momo",
+  "variants": {
+    "fp16": {"repo": "unsloth/Meta-Llama-3.1-8B-Instruct", "target": "/models/fp16", "quant": "", "required_vram": 22,
+             "model_path": "/models/fp16", "tokenizer": ""},
+    "awq":  {"repo": "hugging-quants/Meta-Llama-3.1-8B-Instruct-AWQ-INT4", "target": "/models/awq", "quant": "awq", "required_vram": 10,
+             "model_path": "/models/awq", "tokenizer": ""},
+    "q4":   {"repo": "bartowski/Meta-Llama-3.1-8B-Instruct-GGUF", "files": ["Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf"], "target": "/models/q4", "quant": "gguf", "required_vram": 10,
+             "model_path": "/models/q4/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf", "tokenizer": "unsloth/Meta-Llama-3.1-8B-Instruct"}
+  }
+}

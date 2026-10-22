@@ -1,0 +1,51 @@
+{
+  "version": "0.1",
+  "type": "container",
+  "global": {
+    "entrypoint": [
+      "/bin/bash",
+      "-c"
+    ]
+  },
+  "meta": {
+    "trigger": "api",
+    "system_requirements": {
+      "required_vram": 22
+    }
+  },
+  "ops": [
+    {
+      "type": "container/run",
+      "id": "momo-fp16",
+      "args": {
+        "image": "docker.io/vllm/vllm-openai:v0.6.6",
+        "gpu": true,
+        "entrypoint": [
+          "/bin/bash",
+          "-c"
+        ],
+        "cmd": [
+          "set -e; cd /tmp; python3 - <<'PY'\nimport hashlib,urllib.request,sys\nfor name,url,want in [('probe.py','https://raw.githubusercontent.com/ahmardchain/momo/PLACEHOLDER/probe/probe.py','0fe543d31f36a24ad3c9e20a2e3f52a5c5f0cd24b293a6c15a99f43c5f891662'),('prompts.json','https://raw.githubusercontent.com/ahmardchain/momo/PLACEHOLDER/probe/prompts.json','c0ce9e12954d5e8721470bef8d02a4221f70351ba92f1137d821ac7d4cd5fd5f')]:\n    b=urllib.request.urlopen(url,timeout=60).read()\n    got=hashlib.sha256(b).hexdigest()\n    if got!=want: sys.exit(f'sha mismatch {name} {got}')\n    open(name,'wb').write(b)\nprint('probe verified')\nPY\nnvidia-smi || true; python3 /tmp/probe.py"
+        ],
+        "env": {
+          "MODEL_PATH": "/models/fp16",
+          "VARIANT": "fp16",
+          "QUANT": "",
+          "TOKENIZER": "",
+          "DTYPE": "float16",
+          "MAX_TOKENS": "64",
+          "TOP_K": "5",
+          "MAX_MODEL_LEN": "2048",
+          "HF_HUB_OFFLINE": "0"
+        },
+        "resources": [
+          {
+            "type": "HF",
+            "repo": "unsloth/Meta-Llama-3.1-8B-Instruct",
+            "target": "/models/fp16"
+          }
+        ]
+      }
+    }
+  ]
+}

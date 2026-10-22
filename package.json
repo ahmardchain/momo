@@ -1,0 +1,16 @@
+{
+  "name": "momo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Momo: did the random GPU run the model you paid for? Fingerprint audits of decentralized inference on Nosana, receipts on Arweave.",
+  "scripts": {
+    "run-jobs": "node runner/run.mjs",
+    "upload": "node arweave/upload.mjs"
+  },
+  "dependencies": {
+    "@ardrive/turbo-sdk": "^1",
+    "@nosana/kit": "^2"
+  },
+  "license": "MIT"
+}

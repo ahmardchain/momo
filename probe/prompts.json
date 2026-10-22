@@ -1,0 +1,1002 @@
+[
+ {
+  "id": "arith-000",
+  "cat": "arith",
+  "prompt": "Compute 3 * 5 + 8. Answer with only the number."
+ },
+ {
+  "id": "arith-001",
+  "cat": "arith",
+  "prompt": "Compute 10 * 18 + 28. Answer with only the number."
+ },
+ {
+  "id": "arith-002",
+  "cat": "arith",
+  "prompt": "Compute 17 * 31 + 48. Answer with only the number."
+ },
+ {
+  "id": "arith-003",
+  "cat": "arith",
+  "prompt": "Compute 24 * 44 + 68. Answer with only the number."
+ },
+ {
+  "id": "arith-004",
+  "cat": "arith",
+  "prompt": "Compute 31 * 57 + 88. Answer with only the number."
+ },
+ {
+  "id": "arith-005",
+  "cat": "arith",
+  "prompt": "Compute 38 * 70 + 108. Answer with only the number."
+ },
+ {
+  "id": "arith-006",
+  "cat": "arith",
+  "prompt": "Compute 45 * 83 + 128. Answer with only the number."
+ },
+ {
+  "id": "arith-007",
+  "cat": "arith",
+  "prompt": "Compute 52 * 96 + 148. Answer with only the number."
+ },
+ {
+  "id": "arith-008",
+  "cat": "arith",
+  "prompt": "Compute 59 * 109 + 168. Answer with only the number."
+ },
+ {
+  "id": "arith-009",
+  "cat": "arith",
+  "prompt": "Compute 66 * 122 + 188. Answer with only the number."
+ },
+ {
+  "id": "arith-010",
+  "cat": "arith",
+  "prompt": "Compute 73 * 135 + 208. Answer with only the number."
+ },
+ {
+  "id": "arith-011",
+  "cat": "arith",
+  "prompt": "Compute 80 * 148 + 228. Answer with only the number."
+ },
+ {
+  "id": "arith-012",
+  "cat": "arith",
+  "prompt": "Compute 87 * 161 + 248. Answer with only the number."
+ },
+ {
+  "id": "arith-013",
+  "cat": "arith",
+  "prompt": "Compute 94 * 174 + 268. Answer with only the number."
+ },
+ {
+  "id": "arith-014",
+  "cat": "arith",
+  "prompt": "Compute 101 * 187 + 288. Answer with only the number."
+ },
+ {
+  "id": "arith-015",
+  "cat": "arith",
+  "prompt": "Compute 108 * 200 + 308. Answer with only the number."
+ },
+ {
+  "id": "arith-016",
+  "cat": "arith",
+  "prompt": "Compute 115 * 213 + 328. Answer with only the number."
+ },
+ {
+  "id": "arith-017",
+  "cat": "arith",
+  "prompt": "Compute 122 * 226 + 348. Answer with only the number."
+ },
+ {
+  "id": "arith-018",
+  "cat": "arith",
+  "prompt": "Compute 129 * 239 + 368. Answer with only the number."
+ },
+ {
+  "id": "arith-019",
+  "cat": "arith",
+  "prompt": "Compute 136 * 252 + 388. Answer with only the number."
+ },
+ {
+  "id": "arith-020",
+  "cat": "arith",
+  "prompt": "Compute 143 * 265 + 408. Answer with only the number."
+ },
+ {
+  "id": "arith-021",
+  "cat": "arith",
+  "prompt": "Compute 150 * 278 + 428. Answer with only the number."
+ },
+ {
+  "id": "arith-022",
+  "cat": "arith",
+  "prompt": "Compute 157 * 291 + 448. Answer with only the number."
+ },
+ {
+  "id": "arith-023",
+  "cat": "arith",
+  "prompt": "Compute 164 * 304 + 468. Answer with only the number."
+ },
+ {
+  "id": "arith-024",
+  "cat": "arith",
+  "prompt": "Compute 171 * 317 + 488. Answer with only the number."
+ },
+ {
+  "id": "arith-025",
+  "cat": "arith",
+  "prompt": "Compute 178 * 330 + 508. Answer with only the number."
+ },
+ {
+  "id": "arith-026",
+  "cat": "arith",
+  "prompt": "Compute 185 * 343 + 528. Answer with only the number."
+ },
+ {
+  "id": "arith-027",
+  "cat": "arith",
+  "prompt": "Compute 192 * 356 + 548. Answer with only the number."
+ },
+ {
+  "id": "arith-028",
+  "cat": "arith",
+  "prompt": "Compute 199 * 369 + 568. Answer with only the number."
+ },
+ {
+  "id": "arith-029",
+  "cat": "arith",
+  "prompt": "Compute 206 * 382 + 588. Answer with only the number."
+ },
+ {
+  "id": "arith-030",
+  "cat": "arith",
+  "prompt": "Compute 213 * 395 + 608. Answer with only the number."
+ },
+ {
+  "id": "arith-031",
+  "cat": "arith",
+  "prompt": "Compute 220 * 408 + 628. Answer with only the number."
+ },
+ {
+  "id": "arith-032",
+  "cat": "arith",
+  "prompt": "Compute 227 * 421 + 648. Answer with only the number."
+ },
+ {
+  "id": "arith-033",
+  "cat": "arith",
+  "prompt": "Compute 234 * 434 + 668. Answer with only the number."
+ },
+ {
+  "id": "arith-034",
+  "cat": "arith",
+  "prompt": "Compute 241 * 447 + 688. Answer with only the number."
+ },
+ {
+  "id": "arith-035",
+  "cat": "arith",
+  "prompt": "Compute 248 * 460 + 708. Answer with only the number."
+ },
+ {
+  "id": "arith-036",
+  "cat": "arith",
+  "prompt": "Compute 255 * 473 + 728. Answer with only the number."
+ },
+ {
+  "id": "arith-037",
+  "cat": "arith",
+  "prompt": "Compute 262 * 486 + 748. Answer with only the number."
+ },
+ {
+  "id": "arith-038",
+  "cat": "arith",
+  "prompt": "Compute 269 * 499 + 768. Answer with only the number."
+ },
+ {
+  "id": "arith-039",
+  "cat": "arith",
+  "prompt": "Compute 276 * 512 + 788. Answer with only the number."
+ },
+ {
+  "id": "facts-000",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 1?"
+ },
+ {
+  "id": "facts-001",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 2?"
+ },
+ {
+  "id": "facts-002",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 3?"
+ },
+ {
+  "id": "facts-003",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 4?"
+ },
+ {
+  "id": "facts-004",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 5?"
+ },
+ {
+  "id": "facts-005",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 6?"
+ },
+ {
+  "id": "facts-006",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 7?"
+ },
+ {
+  "id": "facts-007",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 8?"
+ },
+ {
+  "id": "facts-008",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 9?"
+ },
+ {
+  "id": "facts-009",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 10?"
+ },
+ {
+  "id": "facts-010",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 11?"
+ },
+ {
+  "id": "facts-011",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 12?"
+ },
+ {
+  "id": "facts-012",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 13?"
+ },
+ {
+  "id": "facts-013",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 14?"
+ },
+ {
+  "id": "facts-014",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 15?"
+ },
+ {
+  "id": "facts-015",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 16?"
+ },
+ {
+  "id": "facts-016",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 17?"
+ },
+ {
+  "id": "facts-017",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 18?"
+ },
+ {
+  "id": "facts-018",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 19?"
+ },
+ {
+  "id": "facts-019",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 20?"
+ },
+ {
+  "id": "facts-020",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 21?"
+ },
+ {
+  "id": "facts-021",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 22?"
+ },
+ {
+  "id": "facts-022",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 23?"
+ },
+ {
+  "id": "facts-023",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 24?"
+ },
+ {
+  "id": "facts-024",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 25?"
+ },
+ {
+  "id": "facts-025",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 26?"
+ },
+ {
+  "id": "facts-026",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 27?"
+ },
+ {
+  "id": "facts-027",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 28?"
+ },
+ {
+  "id": "facts-028",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 29?"
+ },
+ {
+  "id": "facts-029",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 30?"
+ },
+ {
+  "id": "facts-030",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 31?"
+ },
+ {
+  "id": "facts-031",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 32?"
+ },
+ {
+  "id": "facts-032",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 33?"
+ },
+ {
+  "id": "facts-033",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 34?"
+ },
+ {
+  "id": "facts-034",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 35?"
+ },
+ {
+  "id": "facts-035",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 36?"
+ },
+ {
+  "id": "facts-036",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 37?"
+ },
+ {
+  "id": "facts-037",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 38?"
+ },
+ {
+  "id": "facts-038",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 39?"
+ },
+ {
+  "id": "facts-039",
+  "cat": "facts",
+  "prompt": "In one sentence, what is the chemical symbol and atomic number of element number 40?"
+ },
+ {
+  "id": "code-000",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 3-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-001",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 4 is a prime number. Only code."
+ },
+ {
+  "id": "code-002",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 5-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-003",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 6 is a prime number. Only code."
+ },
+ {
+  "id": "code-004",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 7-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-005",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 8 is a prime number. Only code."
+ },
+ {
+  "id": "code-006",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 9-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-007",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 10 is a prime number. Only code."
+ },
+ {
+  "id": "code-008",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 11-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-009",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 12 is a prime number. Only code."
+ },
+ {
+  "id": "code-010",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 13-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-011",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 14 is a prime number. Only code."
+ },
+ {
+  "id": "code-012",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 15-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-013",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 16 is a prime number. Only code."
+ },
+ {
+  "id": "code-014",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 17-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-015",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 18 is a prime number. Only code."
+ },
+ {
+  "id": "code-016",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 19-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-017",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 20 is a prime number. Only code."
+ },
+ {
+  "id": "code-018",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 21-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-019",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 22 is a prime number. Only code."
+ },
+ {
+  "id": "code-020",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 23-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-021",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 24 is a prime number. Only code."
+ },
+ {
+  "id": "code-022",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 25-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-023",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 26 is a prime number. Only code."
+ },
+ {
+  "id": "code-024",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 27-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-025",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 28 is a prime number. Only code."
+ },
+ {
+  "id": "code-026",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 29-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-027",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 30 is a prime number. Only code."
+ },
+ {
+  "id": "code-028",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 31-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-029",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 32 is a prime number. Only code."
+ },
+ {
+  "id": "code-030",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 33-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-031",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 34 is a prime number. Only code."
+ },
+ {
+  "id": "code-032",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 35-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-033",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 36 is a prime number. Only code."
+ },
+ {
+  "id": "code-034",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 37-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-035",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 38 is a prime number. Only code."
+ },
+ {
+  "id": "code-036",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 39-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-037",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 40 is a prime number. Only code."
+ },
+ {
+  "id": "code-038",
+  "cat": "code",
+  "prompt": "Write a Python one-liner that returns the 41-th Fibonacci number using a loop-free expression. Only code."
+ },
+ {
+  "id": "code-039",
+  "cat": "code",
+  "prompt": "Write a Python function that checks whether 42 is a prime number. Only code."
+ },
+ {
+  "id": "reason-000",
+  "cat": "reason",
+  "prompt": "A train leaves at 6:00 and travels 60 km at 40 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-001",
+  "cat": "reason",
+  "prompt": "A train leaves at 7:00 and travels 75 km at 45 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-002",
+  "cat": "reason",
+  "prompt": "A train leaves at 8:00 and travels 90 km at 50 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-003",
+  "cat": "reason",
+  "prompt": "A train leaves at 9:00 and travels 105 km at 55 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-004",
+  "cat": "reason",
+  "prompt": "A train leaves at 10:00 and travels 120 km at 60 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-005",
+  "cat": "reason",
+  "prompt": "A train leaves at 11:00 and travels 135 km at 65 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-006",
+  "cat": "reason",
+  "prompt": "A train leaves at 12:00 and travels 150 km at 70 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-007",
+  "cat": "reason",
+  "prompt": "A train leaves at 13:00 and travels 165 km at 75 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-008",
+  "cat": "reason",
+  "prompt": "A train leaves at 14:00 and travels 180 km at 80 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-009",
+  "cat": "reason",
+  "prompt": "A train leaves at 15:00 and travels 195 km at 85 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-010",
+  "cat": "reason",
+  "prompt": "A train leaves at 16:00 and travels 210 km at 90 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-011",
+  "cat": "reason",
+  "prompt": "A train leaves at 17:00 and travels 225 km at 95 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-012",
+  "cat": "reason",
+  "prompt": "A train leaves at 6:00 and travels 240 km at 100 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-013",
+  "cat": "reason",
+  "prompt": "A train leaves at 7:00 and travels 255 km at 105 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-014",
+  "cat": "reason",
+  "prompt": "A train leaves at 8:00 and travels 270 km at 110 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-015",
+  "cat": "reason",
+  "prompt": "A train leaves at 9:00 and travels 285 km at 115 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-016",
+  "cat": "reason",
+  "prompt": "A train leaves at 10:00 and travels 300 km at 120 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-017",
+  "cat": "reason",
+  "prompt": "A train leaves at 11:00 and travels 315 km at 125 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-018",
+  "cat": "reason",
+  "prompt": "A train leaves at 12:00 and travels 330 km at 130 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-019",
+  "cat": "reason",
+  "prompt": "A train leaves at 13:00 and travels 345 km at 135 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-020",
+  "cat": "reason",
+  "prompt": "A train leaves at 14:00 and travels 360 km at 140 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-021",
+  "cat": "reason",
+  "prompt": "A train leaves at 15:00 and travels 375 km at 145 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-022",
+  "cat": "reason",
+  "prompt": "A train leaves at 16:00 and travels 390 km at 150 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-023",
+  "cat": "reason",
+  "prompt": "A train leaves at 17:00 and travels 405 km at 155 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-024",
+  "cat": "reason",
+  "prompt": "A train leaves at 6:00 and travels 420 km at 160 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-025",
+  "cat": "reason",
+  "prompt": "A train leaves at 7:00 and travels 435 km at 165 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-026",
+  "cat": "reason",
+  "prompt": "A train leaves at 8:00 and travels 450 km at 170 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-027",
+  "cat": "reason",
+  "prompt": "A train leaves at 9:00 and travels 465 km at 175 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-028",
+  "cat": "reason",
+  "prompt": "A train leaves at 10:00 and travels 480 km at 180 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-029",
+  "cat": "reason",
+  "prompt": "A train leaves at 11:00 and travels 495 km at 185 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-030",
+  "cat": "reason",
+  "prompt": "A train leaves at 12:00 and travels 510 km at 190 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-031",
+  "cat": "reason",
+  "prompt": "A train leaves at 13:00 and travels 525 km at 195 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-032",
+  "cat": "reason",
+  "prompt": "A train leaves at 14:00 and travels 540 km at 200 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-033",
+  "cat": "reason",
+  "prompt": "A train leaves at 15:00 and travels 555 km at 205 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-034",
+  "cat": "reason",
+  "prompt": "A train leaves at 16:00 and travels 570 km at 210 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-035",
+  "cat": "reason",
+  "prompt": "A train leaves at 17:00 and travels 585 km at 215 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-036",
+  "cat": "reason",
+  "prompt": "A train leaves at 6:00 and travels 600 km at 220 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-037",
+  "cat": "reason",
+  "prompt": "A train leaves at 7:00 and travels 615 km at 225 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-038",
+  "cat": "reason",
+  "prompt": "A train leaves at 8:00 and travels 630 km at 230 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "reason-039",
+  "cat": "reason",
+  "prompt": "A train leaves at 9:00 and travels 645 km at 235 km/h. At what time does it arrive? Explain briefly."
+ },
+ {
+  "id": "long_tail-000",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The fox quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-001",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The merchant quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-002",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The astronomer quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-003",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The goat quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-004",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The courier quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-005",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The monk quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-006",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The engineer quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-007",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The child quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-008",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The sailor quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-009",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The baker quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-010",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The owl quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-011",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The poet quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-012",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The soldier quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-013",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The weaver quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-014",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The miner quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-015",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The nurse quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-016",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The pilot quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-017",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The farmer quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-018",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The scribe quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-019",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The dancer quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-020",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The hunter quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-021",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The judge quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-022",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The tailor quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-023",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The smith quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-024",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The clerk quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-025",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The cook quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-026",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The guard quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-027",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The healer quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-028",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The herald quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-029",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The jester quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-030",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The knight quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-031",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The lawyer quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-032",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The mason quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-033",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The nomad quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-034",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The painter quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-035",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The priest quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-036",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The rider quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-037",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The singer quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-038",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The thief quietly crossed the ancient bridge at dawn.'"
+ },
+ {
+  "id": "long_tail-039",
+  "cat": "long_tail",
+  "prompt": "Translate to French, then to German: 'The wizard quietly crossed the ancient bridge at dawn.'"
+ }
+]

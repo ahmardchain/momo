@@ -1,0 +1,9 @@
+node_modules/
+.venv/
+data/
+results/
+tests/synthetic/
+arweave/uploads.jsonl
+*.key.json
+__pycache__/
+.pytest_cache/
