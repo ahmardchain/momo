@@ -22,7 +22,15 @@ def test_analyzer_on_synthetic(tmp_path):
 def test_prompts_fixed():
     p = json.load(open(ROOT/"probe/prompts.json")); assert len(p) == 200 and len({x["id"] for x in p}) == 200
 def test_job_build(tmp_path):
-    subprocess.run([sys.executable, ROOT/"nosana/build_jobs.py", "--commit", "abc123"], check=True)
-    d = json.load(open(ROOT/"nosana/generated/deployment-fp16.json"))
-    assert d["strategy"] == "SIMPLE" and d["timeout"] == 40
-    a = d["job_definition"]["ops"][0]["args"]; assert a["gpu"] and "probe verified" in a["cmd"][0]
+    generated = ROOT / "nosana/generated"
+    before = {p.name: p.read_bytes() for p in generated.glob("*.json")}
+    subprocess.run([sys.executable, ROOT/"nosana/build_jobs.py", "--commit", "abc123", "--out", tmp_path], check=True)
+    after = {p.name: p.read_bytes() for p in generated.glob("*.json")}
+    assert before == after, "build_jobs must not rewrite tracked nosana/generated files"
+    d = json.load(open(tmp_path/"deployment-fp16.json"))
+    assert d["strategy"] == "SIMPLE" and d["timeout"] == 60
+    a = d["job_definition"]["ops"][0]["args"]
+    assert a["gpu"] and a["required_vram"] == 22 and "probe verified" in a["cmd"][0]
+    assert "abc123" in a["cmd"][0]
+def test_spend_and_upload_guards():
+    subprocess.run(["node", "--test", ROOT/"tests/test_guards.mjs"], check=True)
