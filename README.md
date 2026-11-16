@@ -54,7 +54,7 @@ with `@nosana/kit` — [first job](https://learn.nosana.com/api/first-job.html);
    `export NOSANA_API_KEY=nos_...` . (Credits + API key need no Solana wallet; the on-chain CLI path needs SOL+NOS — not used here.)
 3. **Arweave wallet (free):** `node arweave/upload.mjs --gen-wallet ~/.momo/arweave-wallet.json` — generated offline, keep it private.
    Uploads ≤105 KiB are free (10 MiB lifetime per wallet) per [ar.io docs](https://docs.ar.io/build/upload/upload-and-verify/).
-4. **Budget guard:** `--max-credits` is a **USD** ceiling (the balance API reports cents; the runner converts). Omit `--yes` for a dry run that prints the worst-case cost and posts nothing. Credit-paid jobs need `--timeout-s` of at least **3600** (the API returns 400 below that). Nosana bills actual runtime, and the guard reserves the full timeout so a hung job cannot walk past the cap. An RTX 5090 is about $0.48/h ([credits post](https://hackernoon.com/claim-your-$70-nosana-gpu-credits-for-the-decentralize-ai-hackathon)), so one hour worst-case is about $0.48.
+4. **Budget guard:** `--max-credits` is a **USD** ceiling. The balance fields are USD too: a live `assignedCredits` of 70 is the dashboard's $70.00 (available = assigned − reserved − settled). Omit `--yes` for a dry run that prints the worst-case cost and posts nothing. Credit-paid jobs need `--timeout-s` of at least **3600** (the API returns 400 below that). Nosana bills actual runtime, and the guard reserves the full timeout so a hung job cannot walk past the cap. An RTX 5090 is about $0.48/h ([credits post](https://hackernoon.com/claim-your-$70-nosana-gpu-credits-for-the-decentralize-ai-hackathon)), so one hour worst-case is about $0.48.
 
 ## How to run a live audit
 
@@ -80,7 +80,8 @@ node runner/run.mjs --variant calibration --markets <4090>,<3090> --per-market 1
 python3 calibration/split_receipts.py data/raw-<JOB>.json --tag <JOB>
 #    optional trust anchor on a GPU you control: bash calibration/run_local.sh
 
-# 2) the audit. --max-credits 40 means stop at $40, not 40 cents and not 4000 cents.
+# 2) the audit. --max-credits 40 means stop at $40. The balance line is USD as well
+#    (assignedCredits 70 prints as $70.00, the same figure as the dashboard).
 #    Dry run (no --yes) prints jobs-that-fit, worst-case USD per job, and the total.
 #    It posts nothing. Add --yes only if that total is inside the cap and the balance.
 node runner/run.mjs --variant fp16 --markets <m1>,<m2>,<m3> --per-market 4 --timeout-s 3600 --max-credits 40

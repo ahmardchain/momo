@@ -1,10 +1,13 @@
 // Budget gate for Nosana credit-paid jobs.
 //
 // --max-credits is a USD ceiling (the $70 hackathon pot is dollars).
-// The credits balance API reports assigned/reserved/settled in USD cents.
-// jobs.list returns costUSD (dollars) and creditsUsed (cents, same unit as the
-// balance). A quote is often 0 at post time because billing is actual runtime,
-// so the gate uses worst-case price (USD/hour × timeout) and never treats a
+// A live balance was { assignedCredits: 70, reservedCredits: 0, settledCredits: 0 }
+// while the dashboard showed $70.00 and the only transaction was amountUsd: 70.
+// Those fields are USD, even though the OpenAPI text says cents. Dividing by 100
+// reported $0.70 and stopped the audit after a handful of jobs.
+// jobs.list may still return creditsUsed in cents; that quote is ignored unless
+// it lands near the price-based estimate. A quote is often 0 at post time, so
+// the gate uses worst-case price (USD/hour × timeout) and never treats a
 // missing or zero quote as free.
 
 export const MIN_TIMEOUT_S = 3600;
@@ -18,15 +21,67 @@ export function usdPerHour(market) {
   return n;
 }
 
-export function balanceToUsd(balance) {
+function transactionList(transactions) {
+  if (Array.isArray(transactions)) return transactions;
+  if (!transactions || typeof transactions !== 'object') return null;
+  for (const key of ['transactions', 'items', 'data', 'results']) {
+    if (Array.isArray(transactions[key])) return transactions[key];
+  }
+  return null;
+}
+
+/** Sum of transaction amountUsd, or null when there is nothing to compare. */
+export function transactionUsdSum(transactions) {
+  const list = transactionList(transactions);
+  if (!list) return null;
+  let sum = 0;
+  let any = false;
+  for (const tx of list) {
+    const n = Number(tx?.amountUsd);
+    if (!Number.isFinite(n)) continue;
+    sum += n;
+    any = true;
+  }
+  return any ? sum : null;
+}
+
+function offByAbout100(ratio) {
+  if (!Number.isFinite(ratio) || ratio <= 0) return false;
+  return (ratio >= 50 && ratio <= 200) || (ratio >= 1 / 200 && ratio <= 1 / 50);
+}
+
+/**
+ * Available credit balance in USD.
+ * assigned/reserved/settled are dollars: available = assigned - reserved - settled.
+ * Returns null when the balance is missing or not a finite number (caller must refuse).
+ * If that available amount and the sum of transaction amountUsd differ by about 100×,
+ * one side is the cents figure from the OpenAPI text. Prefer the dollar reading
+ * (the magnitude that matches a $70 dashboard balance, not 100× that) and warn.
+ */
+export function balanceToUsd(balance, transactions) {
   if (!balance || typeof balance !== 'object') return null;
   const assigned = Number(balance.assignedCredits);
   const reserved = Number(balance.reservedCredits);
   const settled = Number(balance.settledCredits);
   if (![assigned, reserved, settled].every((n) => Number.isFinite(n))) return null;
-  const cents = assigned - reserved - settled;
-  if (!Number.isFinite(cents)) return null;
-  return { usd: cents / CENTS_PER_USD, cents };
+  const available = assigned - reserved - settled;
+  if (!Number.isFinite(available)) return null;
+
+  const txSum = transactionUsdSum(transactions);
+  if (txSum == null) return { usd: available, warning: null };
+  if (available === 0 && txSum === 0) return { usd: 0, warning: null };
+
+  const ratio = txSum === 0 ? Infinity : Math.abs(available / txSum);
+  if (!offByAbout100(ratio)) return { usd: available, warning: null };
+
+  // The dollar number is the smaller magnitude. 7000 vs amountUsd 70 → $70.
+  // 70 vs amountUsd 7000 → $70. Never keep the 100× (cents) reading.
+  const usd = Math.abs(available) <= Math.abs(txSum) ? available : available / CENTS_PER_USD;
+  const warning = `Credit balance ${available} and the sum of transaction amountUsd (${txSum}) differ by about 100×. ` +
+    `Using $${usd} USD. A live balance of 70 is the dashboard $70.00, so these fields are dollars; ` +
+    `a 100× gap is the cents/dollars mix in the OpenAPI text.`;
+  console.warn(warning);
+  return { usd, warning };
 }
 
 export function worstCaseUsd(usdPerHourRate, timeoutS) {
@@ -103,9 +158,10 @@ export function planSpend({ markets, perMarket, timeoutS, maxCreditsUsd, availab
  * Dollars to add to the spend counter after a post.
  * Never returns less than the pre-job estimate: a missing quote or creditsUsed
  * of 0 must not make the next job look free.
- * costUSD is dollars. creditsUsed is USD cents (the balance unit). A figure
- * that is not near the price-based estimate is ignored so a unit mix cannot
- * zero the counter or inflate it 100×.
+ * costUSD is dollars. creditsUsed is only counted when creditsUsed/100 lands
+ * near the price estimate (the job-quote unit is not the balance unit). A figure
+ * that is not near the estimate is ignored so a unit mix cannot zero the counter
+ * or inflate it 100×.
  */
 export function accountJobUsd(credits, estimateUsd) {
   const est = Number(estimateUsd);
@@ -160,7 +216,7 @@ export async function submitSequentially({ jobs, maxCreditsUsd, availableUsd, po
   return { posted, spent, stopReason };
 }
 
-export function formatPlan({ variant, requestedJobs, plan, timeoutS, maxCreditsUsd, availableUsd, availableCents, yes, commit }) {
+export function formatPlan({ variant, requestedJobs, plan, timeoutS, maxCreditsUsd, availableUsd, balanceWarning, yes, commit }) {
   const lines = [];
   if (!plan.ok) {
     lines.push('REFUSING TO POST — budget check failed closed. No jobs submitted.');
@@ -181,8 +237,8 @@ export function formatPlan({ variant, requestedJobs, plan, timeoutS, maxCreditsU
   else if (plan.eachUsd != null) lines.push(`worst-case USD per job: $${plan.eachUsd.toFixed(4)}`);
   lines.push(`worst-case total: $${plan.totalUsd.toFixed(4)}`);
   lines.push(`budget --max-credits: $${Number(maxCreditsUsd).toFixed(2)} USD`);
-  const cents = Number.isFinite(availableCents) ? `${availableCents} cents` : 'unknown cents';
-  lines.push(`available balance: $${Number(availableUsd).toFixed(2)} USD (${cents}; the API reports cents)`);
+  lines.push(`available balance: $${Number(availableUsd).toFixed(2)} USD`);
+  if (balanceWarning) lines.push(`warning: ${balanceWarning}`);
   if (plan.stopReason) lines.push(`stopped early: ${plan.stopReason}`);
   if (!yes) {
     lines.push(plan.jobs.length
