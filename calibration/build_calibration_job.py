@@ -6,7 +6,7 @@ and repeating it on 2-3 GPU types (3090/4090/A100) measures hardware jitter sepa
 Strongly recommended: also run `calibration/run_local.sh` on one GPU you control (Colab/own box)
 as a trust anchor — receipts from it are labelled trusted=true.
 
-Usage: python3 calibration/build_calibration_job.py --commit <sha> [--market addr] [--timeout-min 75]
+Usage: python3 calibration/build_calibration_job.py --commit <sha> [--market addr] [--timeout-min 75] [--out DIR]
 """
 import argparse, json, pathlib, sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -15,6 +15,7 @@ from build_jobs import job_definition  # noqa
 
 ap = argparse.ArgumentParser(); ap.add_argument("--commit", required=True)
 ap.add_argument("--market", default="<MARKET_ADDRESS>"); ap.add_argument("--timeout-min", type=int, default=75)
+ap.add_argument("--out", default=None, help="output directory (default: nosana/generated)")
 a = ap.parse_args()
 cfg = json.loads((ROOT / "nosana/variants.json").read_text())
 jobs = {v: job_definition(v, cfg, a.commit) for v in cfg["variants"]}
@@ -30,8 +31,11 @@ op["resources"] = [jd["ops"][0]["args"]["resources"][0] for jd in jobs.values()]
 op["env"] = {}
 base["ops"][0]["id"] = "momo-calibration"
 base["meta"]["system_requirements"]["required_vram"] = 22
-out = ROOT / "nosana/generated"; out.mkdir(exist_ok=True)
+base["meta"].setdefault("system_resources", {})["required_vram"] = 22
+op["required_vram"] = 22
+out = pathlib.Path(a.out) if a.out else ROOT / "nosana/generated"
+out.mkdir(parents=True, exist_ok=True)
 (out / "job-calibration.json").write_text(json.dumps(base, indent=2))
 (out / "deployment-calibration.json").write_text(json.dumps({"name": "momo-calibration", "market": a.market, "replicas": 1,
     "timeout": a.timeout_min, "strategy": "SIMPLE", "job_definition": base}, indent=2))
-print("wrote nosana/generated/job-calibration.json and deployment-calibration.json")
+print("wrote", out / "job-calibration.json", "and", out / "deployment-calibration.json")

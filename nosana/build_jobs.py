@@ -4,7 +4,11 @@ The container is the stock vLLM image; at start it downloads probe.py + prompts.
 this repo at a PINNED commit and refuses to run if their sha256 doesn't match. So a node
 can't swap the probe, and anyone can audit exactly what ran.
 
-Usage: python3 nosana/build_jobs.py --commit <git sha> [--market <addr>] [--timeout-min 40]
+Usage: python3 nosana/build_jobs.py --commit <git sha> [--market <addr>] [--timeout-min 60] [--out DIR]
+
+--out defaults to nosana/generated. Tests must pass a temporary --out. Writing the
+tracked files with a fake commit makes the next live job 404 the probe and still
+burn GPU time.
 """
 import argparse, hashlib, json, pathlib
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -33,11 +37,17 @@ def job_definition(variant, cfg, commit):
     return {
         "version": "0.1", "type": "container",
         "global": {"entrypoint": ["/bin/bash", "-c"]},
-        "meta": {"trigger": "api", "system_requirements": {"required_vram": v["required_vram"]}},
+        "meta": {
+            "trigger": "api",
+            # Host docs and examples disagree on the key. Set both so a small GPU
+            # is not handed an FP16 job that OOMs for the whole timeout.
+            "system_requirements": {"required_vram": v["required_vram"]},
+            "system_resources": {"required_vram": v["required_vram"]},
+        },
         "ops": [{
             "type": "container/run", "id": f"momo-{variant}",
             "args": {
-                "image": cfg["image"], "gpu": True,
+                "image": cfg["image"], "gpu": True, "required_vram": v["required_vram"],
                 "entrypoint": ["/bin/bash", "-c"], "cmd": [boot],
                 "env": {"MODEL_PATH": v["model_path"], "VARIANT": variant, "QUANT": v["quant"],
                         "TOKENIZER": v["tokenizer"], "DTYPE": "float16", "MAX_TOKENS": "64", "TOP_K": "5",
@@ -51,14 +61,20 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--commit", required=True)
     ap.add_argument("--market", default="<MARKET_ADDRESS>")
-    ap.add_argument("--timeout-min", type=int, default=40)
+    # Deployment `timeout` is minutes. Credit-paid jobs.list rejects under 60 minutes
+    # (3600 seconds), so the dashboard copy of this file must not say 40.
+    ap.add_argument("--timeout-min", type=int, default=60)
+    ap.add_argument("--out", default=None, help="output directory (default: nosana/generated)")
     a = ap.parse_args()
     cfg = json.loads((ROOT / "nosana/variants.json").read_text())
-    out = ROOT / "nosana/generated"; out.mkdir(exist_ok=True)
+    out = pathlib.Path(a.out) if a.out else ROOT / "nosana/generated"
+    out.mkdir(parents=True, exist_ok=True)
+    written = []
     for name in cfg["variants"]:
         jd = job_definition(name, cfg, a.commit)
         (out / f"job-{name}.json").write_text(json.dumps(jd, indent=2))
         dep = {"name": f"momo-{name}", "market": a.market, "replicas": 1,
                "timeout": a.timeout_min, "strategy": "SIMPLE", "job_definition": jd}
         (out / f"deployment-{name}.json").write_text(json.dumps(dep, indent=2))
-    print("wrote", sorted(p.name for p in out.iterdir()))
+        written += [f"job-{name}.json", f"deployment-{name}.json"]
+    print("wrote", written)

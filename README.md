@@ -54,41 +54,46 @@ with `@nosana/kit` — [first job](https://learn.nosana.com/api/first-job.html);
    `export NOSANA_API_KEY=nos_...` . (Credits + API key need no Solana wallet; the on-chain CLI path needs SOL+NOS — not used here.)
 3. **Arweave wallet (free):** `node arweave/upload.mjs --gen-wallet ~/.momo/arweave-wallet.json` — generated offline, keep it private.
    Uploads ≤105 KiB are free (10 MiB lifetime per wallet) per [ar.io docs](https://docs.ar.io/build/upload/upload-and-verify/).
-4. **Budget guard:** never use the dashboard's long-running strategies for this; Momo uses one-shot jobs with a timeout
-   (an RTX 5090 is about $0.48/h per the [credits post](https://hackernoon.com/claim-your-$70-nosana-gpu-credits-for-the-decentralize-ai-hackathon)).
+4. **Budget guard:** `--max-credits` is a **USD** ceiling (the balance API reports cents; the runner converts). Omit `--yes` for a dry run that prints the worst-case cost and posts nothing. Credit-paid jobs need `--timeout-s` of at least **3600** (the API returns 400 below that). Nosana bills actual runtime, and the guard reserves the full timeout so a hung job cannot walk past the cap. An RTX 5090 is about $0.48/h ([credits post](https://hackernoon.com/claim-your-$70-nosana-gpu-credits-for-the-decentralize-ai-hackathon)), so one hour worst-case is about $0.48.
 
-## Exact steps
+## How to run a live audit
+
+Do this only after the commit you pin is **pushed**. The job downloads `probe.py` from GitHub at that sha; a fake or unpushed sha still starts a GPU and bills the timeout. `pytest` writes job JSON to a temp directory and does not touch `nosana/generated`.
 
 ```bash
 git clone https://github.com/ahmardchain/momo && cd momo
 npm install --ignore-scripts   # if it stalls, install @nosana/kit first, then @ardrive/turbo-sdk arweave
 python3 -m venv .venv && .venv/bin/pip install numpy matplotlib pytest
-.venv/bin/python -m pytest -q tests                      # synthetic tests, no GPU
+.venv/bin/python -m pytest -q tests                      # synthetic tests, no GPU, no tracked-file writes
 
-# pin the job to the pushed commit (the job downloads probe.py from GitHub at this sha)
+export NOSANA_API_KEY=nos_...                            # deploy.nosana.com → API keys. Never commit this.
+
+# pin the job to the pushed commit, then confirm the dry run names that same sha
 python3 nosana/build_jobs.py --commit $(git rev-parse HEAD)
 python3 calibration/build_calibration_job.py --commit $(git rev-parse HEAD)
+node runner/run.mjs --list-markets                       # pick 3090/4090/5090/A100 addresses; note usd_per_hour
 
-node runner/run.mjs --list-markets                        # pick 3090/4090/5090/A100 market addresses
-
-# 1) calibration: one job per GPU type, runs fp16+awq+q4 on the same card (~25-40 min)
-#    post nosana/generated/job-calibration.json via the runner (use --variant calibration) or the dashboard
-node runner/run.mjs --variant calibration --markets <4090>,<3090> --per-market 1 --timeout-s 4500 --yes
+# 1) calibration: fp16+awq+q4 on the same card. 4500s is above the 3600s minimum.
+#    Without --yes this only prints the worst-case USD. Read it before adding --yes.
+node runner/run.mjs --variant calibration --markets <4090>,<3090> --per-market 1 --timeout-s 4500 --max-credits 10
+node runner/run.mjs --variant calibration --markets <4090>,<3090> --per-market 1 --timeout-s 4500 --max-credits 10 --yes
 python3 calibration/split_receipts.py data/raw-<JOB>.json --tag <JOB>
 #    optional trust anchor on a GPU you control: bash calibration/run_local.sh
 
-# 2) the audit: pay for FP16 on many random nodes
-node runner/run.mjs --variant fp16 --markets <m1>,<m2>,<m3> --per-market 4 --max-credits 40        # dry plan
-node runner/run.mjs --variant fp16 --markets <m1>,<m2>,<m3> --per-market 4 --max-credits 40 --yes  # spend
+# 2) the audit. --max-credits 40 means stop at $40, not 40 cents and not 4000 cents.
+#    Dry run (no --yes) prints jobs-that-fit, worst-case USD per job, and the total.
+#    It posts nothing. Add --yes only if that total is inside the cap and the balance.
+node runner/run.mjs --variant fp16 --markets <m1>,<m2>,<m3> --per-market 4 --timeout-s 3600 --max-credits 40
+node runner/run.mjs --variant fp16 --markets <m1>,<m2>,<m3> --per-market 4 --timeout-s 3600 --max-credits 40 --yes
 
-# 3) analyze + publish
+# 3) analyze + publish. Uploads over the Turbo free tier (105 KiB per item, 10 MiB lifetime)
+#    abort with an error instead of charging the wallet. Fetch checks chunk and receipt sha256.
 .venv/bin/python analyzer/analyze.py --refs data/refs --nodes data/nodes --out results
-node arweave/upload.mjs data/refs  && node arweave/upload.mjs data/nodes     # txids -> arweave/uploads.jsonl
-node arweave/fetch.mjs <manifest_txid>                                        # anyone can verify
+node arweave/upload.mjs data/refs && node arweave/upload.mjs data/nodes
+node arweave/fetch.mjs <manifest_txid>
 ```
 
-Budget sketch (estimates, check live prices): an 8B FP16 run is about 5–10 min of model download/load plus about 1–3 min of generation.
-At about $0.2–0.5/h, 20 audit jobs plus 2–3 calibration jobs should fit inside $70.
+Budget sketch: the runner's worst case is the full `--timeout-s`, not the 5–10 minutes a healthy FP16 run usually takes. At about $0.48/h, a 3600s audit job reserves about $0.48 and a 4500s calibration job about $0.60. Twelve audit jobs plus two calibration jobs are about $7 worst-case, inside a `--max-credits 40` ceiling and the $70 pot. If the dry run says `jobs that fit` is less than `requested jobs`, lower `--per-market` or raise `--max-credits` before `--yes`. A second `--yes` posts another batch. Ctrl-C stops jobs already posted so they do not run out the timeout.
 
 ## Status
 

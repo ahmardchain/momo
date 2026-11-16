@@ -2,7 +2,7 @@
   "name": "momo-q4",
   "market": "<MARKET_ADDRESS>",
   "replicas": 1,
-  "timeout": 40,
+  "timeout": 60,
   "strategy": "SIMPLE",
   "job_definition": {
     "version": "0.1",
@@ -17,6 +17,9 @@
       "trigger": "api",
       "system_requirements": {
         "required_vram": 10
+      },
+      "system_resources": {
+        "required_vram": 10
       }
     },
     "ops": [
@@ -26,6 +29,7 @@
         "args": {
           "image": "docker.io/vllm/vllm-openai:v0.6.6",
           "gpu": true,
+          "required_vram": 10,
           "entrypoint": [
             "/bin/bash",
             "-c"
