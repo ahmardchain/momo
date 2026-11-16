@@ -46,8 +46,7 @@ test('USD budget stops submission across markets when creditsUsed would stay 0',
 });
 
 test('$40 cap is dollars, so a 12-job audit at $0.48/h still fits', () => {
-  const balance = balanceToUsd({ assignedCredits: 7000, reservedCredits: 0, settledCredits: 0 });
-  assert.equal(balance.cents, 7000);
+  const balance = balanceToUsd({ assignedCredits: 70, reservedCredits: 0, settledCredits: 0 });
   assert.equal(balance.usd, 70);
   const plan = planSpend({
     markets: ['a', 'b', 'c'],
@@ -61,12 +60,58 @@ test('$40 cap is dollars, so a 12-job audit at $0.48/h still fits', () => {
   assert.ok(plan.totalUsd < 40);
   const text = formatPlan({
     variant: 'fp16', requestedJobs: 12, plan, timeoutS: 3600,
-    maxCreditsUsd: 40, availableUsd: 70, availableCents: 7000, yes: false,
+    maxCreditsUsd: 40, availableUsd: balance.usd, yes: false,
   });
   assert.match(text, /DRY RUN/);
   assert.match(text, /no credits will be spent/);
   assert.match(text, /\$40\.00 USD/);
+  assert.match(text, /available balance: \$70\.00 USD/);
+  assert.doesNotMatch(text, /cents/);
   assert.match(text, /worst-case USD per job: \$0\.4800/);
+});
+
+test('available balance subtracts reserved and settled, in dollars', () => {
+  const balance = balanceToUsd({ assignedCredits: 70, reservedCredits: 12.5, settledCredits: 7.5 });
+  assert.equal(balance.usd, 50);
+  assert.equal(balance.warning, null);
+});
+
+test('a 100× gap with the ledger keeps the dollar reading and warns', () => {
+  const warnings = [];
+  const orig = console.warn;
+  console.warn = (...args) => warnings.push(args.join(' '));
+  try {
+    const centsLooking = balanceToUsd(
+      { assignedCredits: 7000, reservedCredits: 0, settledCredits: 0 },
+      [{ type: 'invitation_claim', amountUsd: 70 }],
+    );
+    assert.equal(centsLooking.usd, 70);
+    const dollarsLooking = balanceToUsd(
+      { assignedCredits: 70, reservedCredits: 0, settledCredits: 0 },
+      [{ type: 'invitation_claim', amountUsd: 7000 }],
+    );
+    assert.equal(dollarsLooking.usd, 70);
+    const agreed = balanceToUsd(
+      { assignedCredits: 70, reservedCredits: 0, settledCredits: 0 },
+      [{ type: 'invitation_claim', amountUsd: 70 }],
+    );
+    assert.equal(agreed.usd, 70);
+    assert.equal(agreed.warning, null);
+  } finally {
+    console.warn = orig;
+  }
+  assert.equal(warnings.length, 2);
+  assert.match(warnings.join('\n'), /100/);
+  assert.equal(balanceToUsd(null), null);
+  assert.equal(balanceToUsd({ assignedCredits: Number.NaN, reservedCredits: 0, settledCredits: 0 }), null);
+  assert.equal(balanceToUsd({ assignedCredits: 'nope', reservedCredits: 0, settledCredits: 0 }), null);
+  const refused = planSpend({
+    markets: ['a'], perMarket: 4, timeoutS: 3600, maxCreditsUsd: 40,
+    availableUsd: balanceToUsd({ assignedCredits: 'nope', reservedCredits: 0, settledCredits: 0 })?.usd,
+    usdPerHourByMarket: { a: 0.48 },
+  });
+  assert.equal(refused.ok, false);
+  assert.equal(refused.jobs.length, 0);
 });
 
 test('missing price, short timeout, and missing balance post nothing', () => {

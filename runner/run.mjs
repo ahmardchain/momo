@@ -96,7 +96,19 @@ for (const m of listed) {
   if (m.address) usdPerHourByMarket[m.address] = usdPerHour(m);
 }
 const bal = await client.api.credits.balance();
-const avail = balanceToUsd(bal);
+let transactions = null;
+try {
+  if (typeof client.api.credits.getTransactions === 'function') {
+    transactions = await client.api.credits.getTransactions({ limit: 100, offset: 0 });
+  }
+} catch (e) {
+  console.warn(`Could not read credit transactions (${e.message || e}). Using the balance as USD.`);
+}
+const avail = balanceToUsd(bal, transactions);
+if (!avail || !Number.isFinite(avail.usd)) {
+  console.error('Credit balance is missing or not a number. Refusing to post (fail closed).');
+  process.exit(1);
+}
 const plan = planSpend({
   markets,
   perMarket: per,
@@ -113,15 +125,14 @@ console.log(formatPlan({
   plan,
   timeoutS: timeout,
   maxCreditsUsd: maxCredits,
-  availableUsd: avail?.usd,
-  availableCents: avail?.cents,
+  availableUsd: avail.usd,
+  balanceWarning: avail.warning,
   yes: has('--yes'),
 }));
 console.log(JSON.stringify({
   variant, commit: pin.commit, markets, per_market: per, timeout_s: timeout,
   max_credits_usd: maxCredits,
-  available_usd: avail?.usd ?? null,
-  available_cents: avail?.cents ?? null,
+  available_usd: avail.usd,
   jobs_that_fit: plan.ok ? plan.jobs.length : 0,
   worst_case_usd_per_job: plan.eachUsd ?? null,
   worst_case_total_usd: plan.ok ? plan.totalUsd : null,
